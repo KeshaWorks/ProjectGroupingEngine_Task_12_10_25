@@ -1,10 +1,11 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.Requests;
+using Application.DTOs.Responses;
 using Application.Interfaces.ForServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class StudentsController : ControllerBase
     {

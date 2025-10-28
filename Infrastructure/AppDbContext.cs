@@ -10,5 +10,6 @@ namespace Infrastructure
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<StudentEnrollment> StudentEnrollments { get; set; }
     }
 }

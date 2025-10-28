@@ -1,4 +1,5 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.Requests;
+using Application.DTOs.Responses;
 using Application.Interfaces.ForRepositories;
 using Application.Interfaces.ForServices;
 using Domain;
@@ -12,8 +13,6 @@ namespace Application.Services
 
         private readonly ILogger<StudentService> _logger;
 
-        private static int _globalId = 0;
-
         public StudentService(IStudentRepositorie studentRepositorie, ILogger<StudentService> logger)
         {
             _studentRepositorie = studentRepositorie;
@@ -24,13 +23,12 @@ namespace Application.Services
         {
             Student student = new Student()
             {
-                Id = ++_globalId,
                 FullName = addStudentRequest.FullName,
-                Email = addStudentRequest.Email,
-                Competencies = addStudentRequest.Competencies
+                Competencies = addStudentRequest.Competencies,
+                Email = addStudentRequest.Email
             };
 
-            await _studentRepositorie.AddStudentAsync(addStudentRequest);
+            await _studentRepositorie.AddStudentAsync(student);
 
             AddStudentResponse addStudentResponse = new AddStudentResponse()
             {
@@ -41,6 +39,25 @@ namespace Application.Services
             };
 
             return addStudentResponse;
+        }
+
+        public async Task<Student> GetStudentAsync(int studentId)
+        {
+            return await _studentRepositorie.GetStudentAsync(studentId);
+        }
+
+        public async Task<List<string>> GetAllCompetenciesAsync()
+        {
+            List<Student> students = await _studentRepositorie.GetAllStudentsAsync();
+
+            List<string> competencies = new List<string>();
+
+            for (int i = 0; i < students.Count; i++)
+            {
+                competencies.Add(students[i].Competencies);
+            }
+
+            return competencies.Distinct().ToList();
         }
     } 
 }
