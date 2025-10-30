@@ -11,16 +11,18 @@ namespace Api.Controllers
 
         private readonly ILogger<CompetenciesController> _logger;
 
-        public CompetenciesController(IСompetenciesManagerService сompetenciesManagerService, ILogger<CompetenciesController> logger)
+        public CompetenciesController(
+            IСompetenciesManagerService сompetenciesManagerService, 
+            ILogger<CompetenciesController> logger)
         {
             _сompetenciesManagerService = сompetenciesManagerService;
             _logger = logger;
         }
 
         [HttpGet("competencies")]
-        public async Task<IActionResult> GetAllCompetencies()
+        public async Task<IActionResult> GetAllCompetenciesAsync()
         {
-            List<string> competencies = await _сompetenciesManagerService.GetAllCompetencies();
+            List<string> competencies = await _сompetenciesManagerService.GetAllCompetenciesAsync();
 
             return Ok(competencies);
         }

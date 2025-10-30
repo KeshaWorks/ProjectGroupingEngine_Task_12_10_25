@@ -26,7 +26,9 @@ namespace Infrastructure.Repositories
 
         public async Task<Student> GetStudentAsync(int studentId)
         {
-            Student student = await _appDbContext.Students.FindAsync(studentId);
+            List<Student> students = await _appDbContext.Students.ToListAsync();
+
+            Student student = students.Find(x => x.Id == studentId);
 
             return student;
         }
@@ -36,6 +38,24 @@ namespace Infrastructure.Repositories
             List<Student> students = await _appDbContext.Students.ToListAsync();
 
             return students;
+        }
+
+        public async Task<StudentEnrollment> GetStudentEnrollmentAsync(int studentId)
+        {
+            List<StudentEnrollment> studentEnrollments = await _appDbContext.StudentEnrollments.ToListAsync();
+
+            StudentEnrollment studentEnrollment = studentEnrollments.Find(x => x.StudentId == studentId);
+
+            return studentEnrollment;
+        }
+
+        public async Task<List<Student>> GetStudentsByCourseIdAsync(int courseId)
+        {
+            List<Student> students = await _appDbContext.Students.ToListAsync();
+
+            List<Student> studentsByCourseId = students.FindAll(x => x.CourseId == courseId).ToList();
+
+            return studentsByCourseId;
         }
     }
 }

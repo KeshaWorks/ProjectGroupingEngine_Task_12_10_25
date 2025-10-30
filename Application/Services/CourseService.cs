@@ -8,22 +8,22 @@ namespace Application.Services
 {
     public class CourseService : ICourseService
     {
-        private readonly ICourseRepositorie _courseRepositorie;
         private readonly IGroupService _groupService;
-        private readonly IStudentService _studentService;
+        private readonly ICourseRepositorie _courseRepositorie;
+        private readonly IStudentRepositorie _studentRepositorie;
 
         private readonly ILogger<CourseService> _logger;
 
         public CourseService(
-            ICourseRepositorie courseRepositorie, 
-            ILogger<CourseService> logger,
             IGroupService groupService,
-            IStudentService studentService)
+            ICourseRepositorie courseRepositorie, 
+            IStudentRepositorie studentRepositorie,
+            ILogger<CourseService> logger)
         {
-            _courseRepositorie = courseRepositorie;
-            _logger = logger;
             _groupService = groupService;
-            _studentService = studentService;
+            _courseRepositorie = courseRepositorie;
+            _studentRepositorie = studentRepositorie;
+            _logger = logger;
         }
 
         public async Task<Course> AddCourseAsync(AddCourseRequest addCourseRequest)
@@ -51,10 +51,8 @@ namespace Application.Services
                 PreferredPeerIds = enrollmentStudentRequest.PreferredPeerIds,
                 Status = "Pending"
             };
-
-            Student student = await _studentService.GetStudentAsync(studentEnrollment.StudentId);
-
-            student.CourseId = studentEnrollment.CourseId;
+            
+            Student student = await _studentRepositorie.GetStudentAsync(studentEnrollment.StudentId);
 
             await _groupService.AddStudentInGroupAsync(student);
 

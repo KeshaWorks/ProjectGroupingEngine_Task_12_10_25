@@ -20,7 +20,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("students")]
-        public async Task<IActionResult> AddStudent([FromBody]AddStudentRequest addStudentRequest)
+        public async Task<IActionResult> AddStudentAsync([FromBody]AddStudentRequest addStudentRequest)
         {
             AddStudentResponse addStudentResponse = await _studentService.AddStudentAsync(addStudentRequest);
 

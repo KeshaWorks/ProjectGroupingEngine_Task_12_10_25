@@ -2,7 +2,7 @@
 {
     public class Group
     {
-        public int Id { get; set; }
-        public int CourseId { get; set; }
+        public int Id { get; init; }
+        public int CourseId { get; init; }
     }
 }

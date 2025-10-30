@@ -2,6 +2,7 @@
 using Application.DTOs.Responses;
 using Application.Interfaces.ForRepositories;
 using Application.Interfaces.ForServices;
+using AutoMapper;
 using Domain;
 using Microsoft.Extensions.Logging;
 
@@ -10,40 +11,29 @@ namespace Application.Services
     public class StudentService : IStudentService
     {
         private readonly IStudentRepositorie _studentRepositorie;
+        private readonly IMapper _mapper;
 
         private readonly ILogger<StudentService> _logger;
 
-        public StudentService(IStudentRepositorie studentRepositorie, ILogger<StudentService> logger)
+        public StudentService(
+            IStudentRepositorie studentRepositorie,
+            IMapper mapper,
+            ILogger<StudentService> logger)
         {
             _studentRepositorie = studentRepositorie;
+            _mapper = mapper;
             _logger = logger;
         }
 
         public async Task<AddStudentResponse> AddStudentAsync(AddStudentRequest addStudentRequest)
         {
-            Student student = new Student()
-            {
-                FullName = addStudentRequest.FullName,
-                Competencies = addStudentRequest.Competencies,
-                Email = addStudentRequest.Email
-            };
+            Student student = _mapper.Map<Student>(addStudentRequest);
 
             await _studentRepositorie.AddStudentAsync(student);
 
-            AddStudentResponse addStudentResponse = new AddStudentResponse()
-            {
-                Id = student.Id,
-                FullName = student.FullName,
-                Email = student.Email,
-                Competencies = student.Competencies
-            };
+            AddStudentResponse addStudentResponse = _mapper.Map<AddStudentResponse>(student);
 
             return addStudentResponse;
-        }
-
-        public async Task<Student> GetStudentAsync(int studentId)
-        {
-            return await _studentRepositorie.GetStudentAsync(studentId);
         }
 
         public async Task<List<string>> GetAllCompetenciesAsync()

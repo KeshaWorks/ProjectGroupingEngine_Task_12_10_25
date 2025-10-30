@@ -19,19 +19,11 @@ namespace Api.Controllers
         }
 
         [HttpGet("groups")]
-        public async Task<IActionResult> GetGroups([FromQuery] int courseId)
+        public async Task<IActionResult> GetGroupsAsync([FromQuery] int courseId)
         {
             GetGroupsResponse getGroupsResponse = await _groupService.GetGroupsAsync(courseId);
 
             return Ok(getGroupsResponse);
         }
-
-        //[HttpPost("groups/assign")]
-        //public async Task<IActionResult> AddGroup([FromQuery] int courseId)
-        //{
-        //    GetGroupsResponse getGroupsResponse = await _groupService.AddGroupAsync(courseId);
-
-        //    return Ok(getGroupsResponse);
-        //}
     }
 }

@@ -2,9 +2,9 @@
 {
     public record EnrollmentStudentRequest
     {
-        public int StudentId { get; set; }
-        public int CourseId { get; set; }
-        public List<int> PreferredPeerIds { get; set; } = new List<int>();
-        public List<int> BlacklistedPeerIds { get; set; } = new List<int>();
+        public int StudentId { get; init; }
+        public int CourseId { get; init; }
+        public List<int> PreferredPeerIds { get; init; } = new List<int>();
+        public List<int> BlacklistedPeerIds { get; init; } = new List<int>();
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IСompetenciesManagerService
     {
-        public Task<List<string>> GetAllCompetencies();
+        public Task<List<string>> GetAllCompetenciesAsync();
     }
 }

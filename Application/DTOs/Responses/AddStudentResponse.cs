@@ -2,9 +2,9 @@
 {
     public record AddStudentResponse
     {
-        public int Id { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Competencies { get; set; }
+        public int Id { get; init; }
+        public string FullName { get; init; }
+        public string Email { get; init; }
+        public string Competencies { get; init; }
     }
 }

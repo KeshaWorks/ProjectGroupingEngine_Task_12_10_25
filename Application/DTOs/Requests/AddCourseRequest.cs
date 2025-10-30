@@ -2,9 +2,9 @@
 {
     public record AddCourseRequest
     {
-        public string Title { get; set; }
-        public int MinGroupSize { get; set; }
-        public int MaxGroupSize { get; set; }
-        public string RequiredCompetencies { get; set; }
+        public string Title { get; init; }
+        public int MinGroupSize { get; init; }
+        public int MaxGroupSize { get; init; }
+        public string RequiredCompetencies { get; init; }
     }
 }

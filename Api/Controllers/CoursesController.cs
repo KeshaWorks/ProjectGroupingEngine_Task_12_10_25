@@ -20,7 +20,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("courses")]
-        public async Task<IActionResult> AddCourse([FromBody] AddCourseRequest addCourseRequest)
+        public async Task<IActionResult> AddCourseAsync([FromBody] AddCourseRequest addCourseRequest)
         {
             Course course = await _courseService.AddCourseAsync(addCourseRequest);
 
@@ -28,7 +28,8 @@ namespace Api.Controllers
         }
 
         [HttpPost("enrollments")]
-        public async Task<IActionResult> EnrollmentStudent(EnrollmentStudentRequest enrollmentStudentRequest)
+        public async Task<IActionResult> EnrollmentStudentAsync(
+            EnrollmentStudentRequest enrollmentStudentRequest)
         {
             StudentEnrollment studentEnrollment = 
                 await _courseService.EnrollmentStudentAsync(enrollmentStudentRequest);

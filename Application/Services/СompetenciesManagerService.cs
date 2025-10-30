@@ -11,8 +11,8 @@ namespace Application.Services
         private readonly ILogger<СompetenciesManagerService> _logger;
 
         public СompetenciesManagerService(
-            ICourseService courseService, 
-            IStudentService studentService, 
+            ICourseService courseService,
+            IStudentService studentService,
             ILogger<СompetenciesManagerService> logger)
         {
             _courseService = courseService;
@@ -20,7 +20,7 @@ namespace Application.Services
             _logger = logger;
         }
 
-        public async Task<List<string>> GetAllCompetencies()
+        public async Task<List<string>> GetAllCompetenciesAsync()
         {
             List<string> coursesCompetencies = await _courseService.GetAllCompetenciesAsync();
 

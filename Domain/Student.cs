@@ -2,11 +2,11 @@
 {
     public class Student
     {
-        public int Id { get; set; }
-        public int GroupId { get; set; }
-        public int CourseId { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Competencies { get; set; }
+        public int Id { get; init; }
+        public int GroupId { get; init; }
+        public int CourseId { get; init; }
+        public string FullName { get; init; }
+        public string Email { get; init; }
+        public string Competencies { get; init; }
     }
 }
